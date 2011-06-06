@@ -5,8 +5,8 @@ switching, both on the ``IChildSite``.
 Installation
 ============
 
-  * add the egg to your buildouts ``eggs``-section.
-  * apply the GS-profile to your Plone site.
+* add the egg to your buildouts ``eggs``-section.
+* apply the GS-profile to your Plone site.
 
 Usage
 =====
