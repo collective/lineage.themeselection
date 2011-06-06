@@ -38,7 +38,6 @@ class ThemeSelectionExtender(object):
         return self.fields
     
     def getOrder(self, original):
-        print original
         neworder = OrderedDict()
         for schemata in original.keys(): 
             neworder[schemata] = original[schemata]
