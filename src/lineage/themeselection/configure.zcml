@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="lineage.themeselection">    
+    
+  <genericsetup:registerProfile
+    name="default"
+    title="Theme Selection for Lineage Child Sites"
+    directory="profiles/default"
+    description="Extension to allow theme selection for lineage child sites."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+  />
+  
+  <adapter
+    for="collective.lineage.interfaces.IChildSite"
+    factory=".extender.ThemeSelectionExtender"
+  />  
+    
+  <subscriber
+    for="collective.lineage.interfaces.IChildSite
+         zope.app.publication.interfaces.IBeforeTraverseEvent"
+    handler=".subscriber.switch_skin"
+  />
+  
+  
+</configure>

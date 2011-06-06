@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<metadata>
+  <version>1</version>
+  <description>Addon for lineage providing theme selection per subsite.</description>
+  <dependency>profile-collective.lineage:default</dependency>  
+</metadata>
