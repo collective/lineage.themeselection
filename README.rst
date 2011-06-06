@@ -39,7 +39,7 @@ Contributors
 License
 =======
 
-   * GPL 2
+GPL 2
 
 Changes
 =======
@@ -47,4 +47,4 @@ Changes
 1.0
 ---
 
-  * Make it work.
+* Make it work. [jensens, 2011-06-06]
