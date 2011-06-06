@@ -30,7 +30,11 @@ We'd be happy to see many pushes, forks and pull-requests to make it better.
 Contributors
 ============
 
-  * Jens Klein <jens@bluedynamics.com>
+* Jens Klein <jens@bluedynamics.com>
+  
+* thanks to Maurits van Rees for showing with collective.editskinswitcher how
+  this can be implemented and to the Weblion-team for the same with 
+  themetweaker.themeswitcher.
   
 License
 =======
