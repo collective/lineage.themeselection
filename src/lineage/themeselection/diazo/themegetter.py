@@ -13,8 +13,9 @@ from zope.schema.vocabulary import SimpleVocabulary
 @adapter(IChildSite)
 @implementer(IThemeSettingsGetter)
 def get_theme_settings(context):
-
     themes = available_themes()
+    theme_name = 'htugraz-basetheme' # TODO: get selected theme
+    theme = themes[theme_name]
 
     registry = queryUtility(IRegistry)
     if registry is None:
@@ -25,7 +26,32 @@ def get_theme_settings(context):
     except KeyError:
         return None
 
+    settings = ThemeSettingsProxy(settings, theme)
     return settings
+
+
+class ThemeSettingsProxy(object):
+    def __init__(self, settings, theme):
+        self.settings = settings
+        self.theme = theme
+
+    def __getattr__(self, name):
+        """ Return attributes from theme, if available. Otherwise the proxied
+        object.
+        """
+        theme = object.__getattribute__(self, 'theme')
+        if name == 'currentTheme':
+            print "currentTheme %s" % theme.__name__
+            return theme.__name__
+        value = getattr(theme, name, None)
+        if value:
+            print "%s %s" % (name, theme.__name__)
+            return value
+
+        print name
+        settings = object.__getattribute__(self, 'settings')
+        return getattr(settings, name)
+
 
 def available_themes():
     themes = getAvailableThemes()
@@ -38,6 +64,6 @@ def available_themes_vocab(context):
     """ Vocabulary for Available Diazo Themes.
     """
     themes = available_themes()
-    theme_items = map(lambda x:(x.title, x.name), themes)
+    theme_items = map(lambda x:(x.title, x.__name__), themes.values())
     return SimpleVocabulary.fromItems(theme_items)
 directlyProvides(available_themes_vocab, IVocabularyFactory)

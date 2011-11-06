@@ -13,6 +13,7 @@
   />
 
   <adapter
+    name="cmf-themeselector"
     for="collective.lineage.interfaces.IChildSite"
     factory=".extender.ThemeSelectionExtender"
   />
