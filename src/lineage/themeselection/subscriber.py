@@ -6,5 +6,5 @@ def switch_skin(obj, event):
         return
     theme = field.get(obj)
     if not theme:
-        return 
+        return
     obj.changeSkin(theme, event.request)
