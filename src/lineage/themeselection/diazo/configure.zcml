@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope">
+
+    <adapter
+      for="collective.lineage.interfaces.IChildSite"
+      factory=".extender.DiazoThemeSelectionExtender"
+    />
+
+    <adapter factory=".themegetter.get_theme_settings" />
+    
+    <utility
+        component=".themegetter.available_themes_vocab"
+        name="lineage.themeselection.diazo.available_themes"
+    />
+
+</configure>

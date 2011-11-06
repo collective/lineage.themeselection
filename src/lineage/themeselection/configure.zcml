@@ -22,6 +22,7 @@
          zope.app.publication.interfaces.IBeforeTraverseEvent"
     handler=".subscriber.switch_skin"
   />
-
+  
+  <include zcml:provides="installed plone.app.theming" package=".diazo" />
 
 </configure>
