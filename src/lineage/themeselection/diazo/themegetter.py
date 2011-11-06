@@ -13,8 +13,14 @@ from zope.schema.vocabulary import SimpleVocabulary
 @adapter(IChildSite)
 @implementer(IThemeSettingsGetter)
 def get_theme_settings(context):
+
     themes = available_themes()
-    theme_name = 'htugraz-basetheme' # TODO: get selected theme
+    field = context.Schema().get('lineage_diazotheme', None)
+    if field is None:
+        return
+    theme_name = field.get(context)
+    if not theme_name:
+        return
     theme = themes[theme_name]
 
     registry = queryUtility(IRegistry)
@@ -41,14 +47,14 @@ class ThemeSettingsProxy(object):
         """
         theme = object.__getattribute__(self, 'theme')
         if name == 'currentTheme':
-            print "currentTheme %s" % theme.__name__
             return theme.__name__
+
+        # TODO: prefer ITheme instead of IThemeSettings??
         value = getattr(theme, name, None)
         if value:
             print "%s %s" % (name, theme.__name__)
             return value
 
-        print name
         settings = object.__getattribute__(self, 'settings')
         return getattr(settings, name)
 
