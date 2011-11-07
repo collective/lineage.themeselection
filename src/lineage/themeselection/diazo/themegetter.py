@@ -37,6 +37,10 @@ def get_theme_settings(context):
 
 
 class ThemeSettingsProxy(object):
+    """ Proxy object, which passes the original object through except for some
+    attributes.
+    """
+
     def __init__(self, settings, theme):
         self.settings = settings
         self.theme = theme
