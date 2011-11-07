@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-import sys, os
+import os
 
 version = '1.0'
 shortdesc ="Theme Selection on Lineage Subsites"
@@ -14,8 +14,8 @@ setup(name='lineage.themeselection',
             'Environment :: Web Environment',
             'License :: OSI Approved :: GNU General Public License (GPL)',
             'Operating System :: OS Independent',
-            'Programming Language :: Python', 
-            'Topic :: Internet :: WWW/HTTP :: Dynamic Content',        
+            'Programming Language :: Python',
+            'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
       ],
       keywords='',
       author='BlueDynamics Alliance',
