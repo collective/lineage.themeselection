@@ -52,6 +52,9 @@ class ThemeSettingsProxy(object):
         theme = object.__getattribute__(self, 'theme')
         if name == 'currentTheme':
             return theme.__name__
+        if name == 'enabled':
+            # No need to have a Diazo theme enabled in main site
+            return True
 
         # TODO: prefer ITheme instead of IThemeSettings??
         value = getattr(theme, name, None)
