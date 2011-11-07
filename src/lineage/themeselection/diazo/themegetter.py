@@ -56,7 +56,7 @@ class ThemeSettingsProxy(object):
             # No need to have a Diazo theme enabled in main site
             return True
 
-        # TODO: prefer ITheme instead of IThemeSettings??
+        # Prefer ITheme instead of IThemeSettings??
         value = getattr(theme, name, None)
         if value:
             print "%s %s" % (name, theme.__name__)
