@@ -59,7 +59,6 @@ class ThemeSettingsProxy(object):
         # Prefer ITheme instead of IThemeSettings??
         value = getattr(theme, name, None)
         if value:
-            print "%s %s" % (name, theme.__name__)
             return value
 
         settings = object.__getattribute__(self, 'settings')
