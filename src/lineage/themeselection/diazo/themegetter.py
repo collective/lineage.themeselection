@@ -1,8 +1,8 @@
 from zope.component import adapter
 from zope.component import queryUtility
 from zope.interface import implementer
+from zope.publisher.interfaces.browser import IBrowserRequest
 from plone.app.theming.interfaces import IThemeSettings
-from plone.app.theming.interfaces import IThemeSettingsLookup
 from plone.app.theming.utils import getAvailableThemes
 from plone.registry.interfaces import IRegistry
 from collective.lineage.interfaces import IChildSite
@@ -10,9 +10,9 @@ from zope.interface import directlyProvides
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 
-@adapter(IChildSite)
-@implementer(IThemeSettingsLookup)
-def get_theme_settings(context):
+@adapter(IChildSite, IBrowserRequest)
+@implementer(IThemeSettings)
+def get_theme_settings(context, request):
 
     themes = available_themes()
     field = context.Schema().get('lineage_diazotheme', None)
