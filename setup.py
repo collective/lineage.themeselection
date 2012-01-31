@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import sys, os
 
 version = '1.1'
-shortdesc ="Theme Selection on Lineage Subsites"
+shortdesc ="Lineage Addon: Theme Selection on Subsites"
 longdesc = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 
 setup(name='lineage.themeselection',
@@ -30,6 +30,7 @@ setup(name='lineage.themeselection',
       install_requires=[
           'setuptools',
           'collective.lineage',
+          'lineage.registry',
           'archetypes.schemaextender',
       ],
       entry_points="""
