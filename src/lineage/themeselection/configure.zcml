@@ -29,7 +29,7 @@
         for="collective.lineage.interfaces.IChildSite"
         layer=".interfaces.ILineageThemingLayer"
         class="plone.app.theming.browser.controlpanel.ThemingControlpanel"
-        template="controlpanel.pt"
+        template="themesettings.pt"
         permission="cmf.ManagePortal"
         />
 
