@@ -33,4 +33,11 @@
         permission="cmf.ManagePortal"
         />
 
+    <browser:page
+        for="*"
+        name="is_subsite_enabled"
+        permission="zope2.View"
+        class=".action.ActionAvailableView"
+    />
+
 </configure>
