@@ -1,21 +1,25 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '1.1'
+version = '1.2'
 shortdesc ="Lineage Addon: Theme Selection on Subsites"
 longdesc = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
+longdesc += open(os.path.join(os.path.dirname(__file__), 'HISTORY.rst')).read()
+longdesc += open(os.path.join(os.path.dirname(__file__), 'LICENSE.rst')).read()
 
 setup(name='lineage.themeselection',
       version=version,
       description=shortdesc,
       long_description=longdesc,
       classifiers=[
-            'Development Status :: 4 - Beta',
+            'Development Status :: 5 - Production/Stable',
             'Environment :: Web Environment',
             'License :: OSI Approved :: GNU General Public License (GPL)',
             'Operating System :: OS Independent',
             'Programming Language :: Python', 
-            'Topic :: Internet :: WWW/HTTP :: Dynamic Content',        
+            'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+            'Framework :: Plone :: 4.1',
+            'Framework :: Plone :: 4.2',
       ],
       keywords='',
       author='BlueDynamics Alliance',

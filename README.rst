@@ -19,13 +19,33 @@ Restrictions
 
 The child site object has to be Archetypes based.
 
-Source Code
-===========
+Installation
+============
 
-The sources are in a GIT DVCS with its main branches at
-`github <http://github.com/collective/lineage.themeselection>`_.
+Just depend in your buildout on the egg ``lineage.themeselection``. ZCML is
+loaded automagically with z3c.autoinclude.
 
-We'd be happy to see many pushes, forks and pull-requests to make it better.
+Install it as an addon in Plone control-panel or portal_setup.
+
+This package is written for Plone 4.1 or later.
+
+Source Code and Contributions
+=============================
+
+If you want to help with the development (improvement, update, bug-fixing, ...)
+of ``lineage.themeselection`` this is a great idea!
+
+The code is located in the
+`github collective <https://github.com/collective/lineage.themeselection>`_.
+
+You can clone it or `get access to the github-collective
+<http://collective.github.com/>`_ and work directly on the project.
+
+Maintainer is Jens Klein and the BlueDynamics Alliance developer team. We
+appreciate any contribution and if a release is needed to be done on pypi,
+please just contact one of us
+`dev@bluedynamics dot com <mailto:dev@bluedynamics.com>`_
+
 
 Contributors
 ============
@@ -36,22 +56,3 @@ Contributors
   this can be implemented and to the Weblion-team for the same with
   themetweaker.themeswitcher.
 
-License
-=======
-
-GPL 2
-
-Changes
-=======
-
-1.1
----
-
-- added manifest file [jensens]
-
-- cleanup [thet]
-
-1.0
----
-
-* Make it work. [jensens, 2011-06-06]
