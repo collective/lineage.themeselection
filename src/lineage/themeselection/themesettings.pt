@@ -1,0 +1,460 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="plone">
+
+<body>
+
+<div metal:fill-slot="main">
+
+    <h1 class="documentFirstHeading"
+        i18n:translate="heading_theme_settings">Child Site Theme settings</h1>
+
+    <p i18n:translate="description_theme_settings">
+        Use this control panel to enable a Diazo theme. You can either
+        select a pre-registered theme, or configure a theme directly by
+        specifying a rules file.
+    </p>
+
+    <dl class="portalMessage info">
+        <dt>info</dt>
+        <dd i18n:translate="description_notheme_controlpanel">
+            Please note that this control panel page will never be themed.
+        </dd>
+    </dl>
+
+    <dl class="enableFormTabbing">
+        <dt id="fieldsetlegend-basic">Basic settings</dt>
+        <dd id="fieldset-basic">
+
+            <p i18n:translate="description_basic_settings">
+                To enable a theme registered with Plone, choose it from the
+                list below and make sure <em>Enable theme</em> is selected.
+                It is also possible to use themes that are not pre-registered
+                with Plone. Use the <em>Advanced</em> tab to configure a
+                theme manually.
+            </p>
+
+            <form
+                name="basic"
+                method="post"
+                class="enableUnloadProtection"
+                tal:attributes="action request/URL"
+                tal:define="errors view/errors">
+
+                <div
+                    class="field"
+                    tal:define="selected python:request.get('enabled', view.settings.enabled)">
+
+                    <input type="hidden" value="" name="enabled:boolean:default" />
+                    <input type="checkbox" value="1" name="enabled:boolean" id="enabled"
+                        tal:attributes="checked python:'checked' if selected else None"
+                        />
+                    <label for="enabled" i18n:translate="label_enabled">Enable theme</label>
+                    <div class="formHelp" i18n:translate="help_enabled">
+                        If this option is disabled, no theme will be applied.
+                    </div>
+
+                </div>
+
+                <div
+                    class="field"
+                    tal:define="selected python:request.get('selectedTheme', view.selectedTheme)">
+
+                    <label for="selectedTheme" i18n:translate="label_selected_theme">Select a theme</label>
+                    <div class="formHelp" i18n:translate="help_selected_theme">
+                        Select a theme from the list below to apply this theme.
+                    </div>
+
+                    <select size="1" id="selectedTheme" name="selectedTheme">
+                        <option
+                            value=""
+                            i18n:translate="label_please_select_theme">Please select</option>
+                        <option
+                            value="_other_"
+                            tal:condition="python:not selected and view.settings.rules is not None"
+                            selected="selected"
+                            i18n:translate="label_other">Other (see advanced tab)</option>
+                        <option
+                            tal:repeat="theme view/availableThemes"
+                            tal:content="string:${theme/title} (${theme/__name__})"
+                            tal:attributes="value theme/__name__;
+                                            title theme/description;
+                                            selected python:theme.__name__ == selected and 'selected' or None"
+                            />
+                    </select>
+
+                </div>
+
+                <div class="formControls">
+                    <input
+                        type="submit"
+                        name="form.button.BasicSave"
+                        class="context"
+                        value="Save"
+                        i18n:attributes="value" />
+
+                    <input
+                        type="submit"
+                        name="form.button.Cancel"
+                        class="context"
+                        value="Cancel"
+                        i18n:attributes="value" />
+                </div>
+
+                <input tal:replace="structure context/@@authenticator/authenticator" />
+
+            </form>
+
+        </dd>
+
+        <dt id="fieldsetlegend-advanced">Advanced settings</dt>
+        <dd id="fieldset-advanced">
+
+            <p i18n:translate="description_advanced">
+               Use the fields below to configure the Diazo rules file and
+               absolute path prefix, or to enable reading a theme from a
+               remote server.
+            </p>
+
+            <form
+                name="advanced"
+                method="post"
+                class="enableUnloadProtection"
+                tal:attributes="action request/URL"
+                tal:define="errors view/errors">
+
+                <div
+                    tal:define="error errors/rules | nothing;
+                                rules python:request.get('rules', view.settings.rules)"
+                    tal:attributes="class python:'field error' if error else 'field'">
+
+                    <label for="rules" i18n:translate="label_rules">Rules file</label>
+                    <div class="formHelp" i18n:translate="help_rules">
+                        Enter a path or URL for the theme rules file.
+                    </div>
+
+                    <div tal:content="error" tal:condition="error" />
+
+                    <input
+                        name="rules"
+                        id="rules"
+                        type="text"
+                        size="50"
+                        tal:attributes="value rules"
+                        />
+
+                </div>
+
+                <div
+                    tal:define="error errors/absolutePrefix | nothing;
+                                absolutePrefix python:request.get('absolutePrefix', view.settings.absolutePrefix)"
+                    tal:attributes="class python:'field error' if error else 'field'">
+
+                    <label for="absolutePrefix" i18n:translate="label_absolute_prefix">Absolute path prefix</label>
+                    <div class="formHelp" i18n:translate="help_absolute_prefix">
+                        If your theme uses relative paths for images, stylesheets
+                        or other resources, you can enter a prefix here to make
+                        sure these resources will work regardless of which page
+                        Plone is rendering.
+                    </div>
+
+                    <div tal:content="error" tal:condition="error" />
+
+                    <input
+                        name="absolutePrefix"
+                        id="absolutePrefix"
+                        type="text"
+                        size="50"
+                        tal:attributes="value absolutePrefix"
+                        />
+
+                </div>
+
+                <div
+                    tal:define="error errors/doctype | nothing;
+                                doctype python:request.get('doctype', view.settings.doctype)"
+                    tal:attributes="class python:'field error' if error else 'field'">
+
+                    <label for="doctype" i18n:translate="label_doctype">Doctype</label>
+                    <div class="formHelp" i18n:translate="help_doctype">
+                        You can specify a Doctype string which will be set on
+                        the output, for example "<!DOCTYPE html>". If left
+                        blank the default XHTML 1.0 transistional Doctype or
+                        that set in the Diazo theme is used.
+                    </div>
+
+                    <div tal:content="error" tal:condition="error" />
+
+                    <input
+                        name="doctype"
+                        id="doctype"
+                        type="text"
+                        size="50"
+                        tal:attributes="value doctype"
+                        />
+
+                </div>
+
+                <div
+                    class="field"
+                    tal:define="selected python:request.get('readNetwork', view.settings.readNetwork)">
+
+                    <input type="hidden" value="" name="readNetwork:boolean:default" />
+                    <input type="checkbox" value="1" name="readNetwork:boolean" id="readNetwork"
+                        tal:attributes="checked python:'readNetwork' if selected else None"
+                        />
+                    <label for="readNetwork" i18n:translate="label_read_network">Read network</label>
+                    <div class="formHelp" i18n:translate="help_read_network">
+                        Allow rules and themes to be read from remote servers.
+                    </div>
+
+                </div>
+
+                <div
+                    tal:define="error errors/hostnameBlacklist | nothing;
+                                hostnameBlacklist view/settings/hostnameBlacklist | python:[];
+                                hostnameBlacklist python:request.get('hostnameBlacklist', hostnameBlacklist)"
+                    tal:attributes="class python:'field error' if error else 'field'">
+
+                    <label for="hostnameBlacklist" i18n:translate="label_hostname_blacklist">Unthemed host names</label>
+                    <div class="formHelp" i18n:translate="help_hostname_blacklist">
+                        If there are hostnames that you do not want to be
+                        themed, you can list them here, one per line. This is
+                        useful during theme development, so that you can
+                        compare the themed and unthemed sites. In some cases,
+                        you may also want to provided an unthemed host alias
+                        for content administrators to be able to use 'plain'
+                        Plone.
+                    </div>
+
+                    <div tal:content="error" tal:condition="error" />
+
+                    <textarea
+                        name="hostnameBlacklist:lines"
+                        id="hostnameBlacklist"
+                        rows="5"
+                        cols="50"
+                        tal:content="python:'\n'.join(hostnameBlacklist)"
+                        ></textarea>
+
+                </div>
+
+                <div
+                    tal:define="error errors/parameterExpressions | nothing;
+                                parameterExpressions python:view.settings.parameterExpressions or {};
+                                parameterExpressions python:['%s = %s' % (k,v) for k,v in parameterExpressions.items()];
+                                parameterExpressions python:request.get('parameterExpressions', parameterExpressions)"
+                    tal:attributes="class python:'field error' if error else 'field'">
+
+                    <label for="parameterExpressions" i18n:translate="label_parameter_expressions">Parameter expressions</label>
+                    <div class="formHelp" i18n:translate="help_parameter_expressions">
+                        You can define parameters that will be passed
+                        to the compiled theme here. In your rules file, you can
+                        refer to a parameter by <code>$name</code>. Parameters
+                        are defined using TALES expressions, which should
+                        evaluate to a string, a number, a boolean or None.
+                        Available variables are <code>context</code>,
+                        <code>request</code>, <code>portal</code>,
+                        <code>portal_state</code>, and
+                        <code>context_state</code>. Define one variable
+                        per line, in the format <code>name = expression</code>.
+                    </div>
+
+                    <div tal:content="error" tal:condition="error" />
+
+                    <textarea
+                        name="parameterExpressions:lines"
+                        id="parameterExpressions"
+                        rows="8"
+                        cols="50"
+                        tal:content="python:'\n'.join(parameterExpressions)"
+                        ></textarea>
+
+                </div>
+
+
+                <div class="formControls">
+                    <input
+                        type="submit"
+                        name="form.button.AdvancedSave"
+                        class="context"
+                        value="Save"
+                        i18n:attributes="value" />
+
+                    <input
+                        type="submit"
+                        name="form.button.Cancel"
+                        class="context"
+                        value="Cancel"
+                        i18n:attributes="value" />
+                </div>
+
+                <input tal:replace="structure context/@@authenticator/authenticator" />
+
+            </form>
+
+        </dd>
+
+        <dt id="fieldsetlegend-import">Import theme</dt>
+        <dd id="fieldset-import">
+
+            <p i18n:translate="description_import">
+               Use the form below to upload a Zip file containing a theme.
+            </p>
+
+            <form
+                name="import"
+                method="post"
+                enctype="multipart/form-data"
+                class="enableUnloadProtection"
+                tal:attributes="action request/URL"
+                tal:define="errors view/errors">
+
+                <div
+                    class="field"
+                    tal:define="error errors/themeArchive | nothing"
+                    tal:attributes="class python:'field error' if error else 'field'">
+
+                    <label for="themeArchive" i18n:translate="label_theme_archive">Theme archive</label>
+
+                    <div class="formHelp" i18n:translate="help_theme_archive">
+                        Select a file to upload. This must be a Zip file with
+                        a single top level directory, which will be used as
+                        the theme identifier. This directory must contain a
+                        <code>rules.xml</code> file or a
+                        <code>manifest.cfg</code> file indicating an
+                        alternative Diazo rules file.
+                    </div>
+
+                    <div tal:content="error" tal:condition="error" />
+
+                    <input
+                        type="file"
+                        name="themeArchive"
+                        id="themeArchive"
+                        />
+
+                </div>
+
+                <div
+                    class="field"
+                    tal:define="selected python:request.get('enableNewTheme', True)">
+                    <input type="hidden" value="" name="enableNewTheme:boolean:default" />
+                    <input type="checkbox" value="1" name="enableNewTheme:boolean" id="enableNewTheme"
+                        tal:attributes="checked python:'enableNewTheme' if selected else None"
+                        />
+                    <label for="enableNewTheme" i18n:translate="label_enable_new_theme">Immediately enable new theme</label>
+                    <div class="formHelp" i18n:translate="help_enable_new_theme">
+                        Select this option to enable the newly uploaded theme
+                        immediately.
+                    </div>
+                </div>
+
+                <div
+                    class="field"
+                    tal:define="selected python:request.get('replaceExisting', False)">
+                    <input type="hidden" value="" name="replaceExisting:boolean:default" />
+                    <input type="checkbox" value="" name="replaceExisting:boolean" id="replaceExisting"
+                        tal:attributes="checked python:'replaceExisting' if selected else None"
+                        />
+                    <label for="replaceExisting" i18n:translate="label_replace_existing">Replace existing theme</label>
+                    <div class="formHelp" i18n:translate="help_replace_existing">
+                        Select this option to replace any existing theme that
+                        may have been uploaded previously.
+                    </div>
+                </div>
+
+                <div class="formControls">
+                    <input
+                        type="submit"
+                        name="form.button.Import"
+                        class="context"
+                        value="Import"
+                        i18n:attributes="value" />
+
+                    <input
+                        type="submit"
+                        name="form.button.Cancel"
+                        class="context"
+                        value="Cancel"
+                        i18n:attributes="value" />
+                </div>
+
+                <input tal:replace="structure context/@@authenticator/authenticator" />
+
+            </form>
+
+        </dd>
+
+        <tal:block condition="view/zodbThemes">
+            <dt id="fieldsetlegend-import">Manage themes</dt>
+            <dd id="fieldset-import">
+
+                <p i18n:translate="description_manage">
+                   Use the form below to delete themes that have previously been
+                   uploaded. Click on a theme name to download it as a Zip
+                   archive.
+                </p>
+
+                <form
+                    name="manage"
+                    method="post"
+                    class="enableUnloadProtection"
+                    tal:attributes="action request/URL"
+                    tal:define="errors view/errors">
+
+                    <table class="listing">
+                        <thead>
+                            <tr>
+                                <th />
+                                <th i18n:translate="heading_theme_title">Title</th>
+                                <th i18n:translate="heading_theme_description">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr tal:repeat="theme view/zodbThemes">
+                                <td>
+                                    <input
+                                        type="checkbox"
+                                        name="themes:list"
+                                        tal:attributes="value theme/__name__"
+                                        />
+                                </td>
+                                <td>
+                                    <a  target="_new"
+                                        tal:attributes="href string:${context/absolute_url}/++theme++${theme/__name__}/@@download-zip"
+                                        tal:content="string:${theme/title} (${theme/__name__})"
+                                        />
+                                </td>
+                                <td tal:content="theme/description" />
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="formControls">
+                        <input
+                            type="submit"
+                            name="form.button.DeleteSelected"
+                            class="destructive"
+                            value="Delete"
+                            i18n:attributes="value"
+                            />
+                    </div>
+
+                    <input tal:replace="structure context/@@authenticator/authenticator" />
+
+                </form>
+
+            </dd>
+        </tal:block>
+
+    </dl>
+
+</div>
+
+</body>
+</html>

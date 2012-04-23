@@ -1,27 +1,43 @@
-<configure
-    xmlns="http://namespaces.zope.org/zope"
+<configure 
+    xmlns="http://namespaces.zope.org/zope" 
     xmlns:zcml="http://namespaces.zope.org/zcml"
-    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    i18n_domain="lineage.themeselection">
+    xmlns:browser="http://namespaces.zope.org/browser"
+	xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+	i18n_domain="lineage.themeselection">
+	
+    <include package="Products.CMFCore" file="permissions.zcml"/>
+    <include package="collective.lineage" />
 
-  <genericsetup:registerProfile
-    name="default"
-    title="Theme Selection for Lineage Child Sites"
-    directory="profiles/default"
-    description="Extension to allow theme selection for lineage child sites."
-    provides="Products.GenericSetup.interfaces.EXTENSION"
-  />
+	<genericsetup:registerProfile 
+	    name="default"
+		title="Lineage: Theme Selection Addon for Child Sites" 
+		directory="profile"
+		description="Extension to allow theme selection for lineage child sites."
+		provides="Products.GenericSetup.interfaces.EXTENSION" />
 
-  <adapter
-    for="collective.lineage.interfaces.IChildSite"
-    factory=".extender.ThemeSelectionExtender"
-  />
+	<adapter 
+	    for="collective.lineage.interfaces.IChildSite"
+		factory=".extender.ThemeSelectionExtender" />
 
-  <subscriber
-    for="collective.lineage.interfaces.IChildSite
-         zope.app.publication.interfaces.IBeforeTraverseEvent"
-    handler=".subscriber.switch_skin"
-  />
+	<subscriber
+		for="collective.lineage.interfaces.IChildSite
+             zope.traversing.interfaces.IBeforeTraverseEvent"
+		handler=".subscriber.apply_theme" />
+		
+    <browser:page
+        name="theming-controlpanel"
+        for="collective.lineage.interfaces.IChildSite"
+        layer=".interfaces.ILineageThemingLayer"
+        class="plone.app.theming.browser.controlpanel.ThemingControlpanel"
+        template="themesettings.pt"
+        permission="cmf.ManagePortal"
+        />
 
+    <browser:page
+        for="*"
+        name="is_subsite_enabled"
+        permission="zope2.View"
+        class=".action.ActionAvailableView"
+    />
 
 </configure>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<object name="portal_actions" meta_type="Plone Actions Tool"
+	xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+	<object name="object" meta_type="CMF Action Category">
+		<object name="subtheme" meta_type="CMF Action" i18n:domain="plone">
+			<property name="title" i18n:translate="">Theme</property>
+			<property name="description" i18n:translate="">Diazo Theme for Subsites</property>
+			<property name="url_expr">string:$object_url/@@theming-controlpanel</property>
+			<property name="available_expr">python:object.restrictedTraverse('@@is_subsite_enabled')()</property>
+			<property name="permissions">
+				<element value="Manage Portal" />
+			</property>
+			<property name="visible">True</property>
+		</object>
+	</object>
+</object>

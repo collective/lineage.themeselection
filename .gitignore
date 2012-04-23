@@ -3,6 +3,7 @@ bin
 eggs
 downloads
 *.egg-info
+.settings
 develop-eggs
 .installed.cfg
 *.pyc
