@@ -31,6 +31,7 @@ setup(name='lineage.themeselection',
           'setuptools',
           'collective.lineage',
           'archetypes.schemaextender',
+          'plone.app.theming', #for plone 4.2
       ],
       entry_points="""
       [z3c.autoinclude.plugin]
