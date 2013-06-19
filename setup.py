@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-import sys, os
+import os
 
 version = '1.2'
 shortdesc ="Lineage Addon: Theme Selection on Subsites"
