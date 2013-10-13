@@ -460,7 +460,7 @@
                     </div>
 
                 </fieldset>
-                <fieldset>
+                <fieldset tal:condition="nothing">
                     <legend i18n:translate="">Theme base</legend>
 
                     <p i18n:translate="description_advanced_base">
