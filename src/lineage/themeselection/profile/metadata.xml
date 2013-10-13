@@ -2,7 +2,7 @@
 <metadata>
   <version>1</version>
   <dependencies>
-    <dependency>profile-collective.lineage:default</dependency>  
+    <dependency>profile-collective.lineage:default</dependency>
     <dependency>profile-plone.app.theming:default</dependency>
-  </dependencies>  
+  </dependencies>
 </metadata>
