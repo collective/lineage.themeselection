@@ -24,6 +24,11 @@
            zope.traversing.interfaces.IBeforeTraverseEvent"
       handler=".subscriber.apply_theme" />
 
+  <adapter
+      for="collective.lineage.interfaces.IChildSite"
+      factory="plone.app.controlpanel.skins.SkinsControlPanelAdapter"/>
+
+
   <browser:page
       name="theming-controlpanel"
       for="collective.lineage.interfaces.IChildSite"
