@@ -34,10 +34,19 @@
       />
 
   <browser:page
-      for="*"
-      name="is_subsite_enabled"
+      name="theming-controlpanel-help"
+      for="collective.lineage.interfaces.IChildSite"
+      layer=".interfaces.ILineageThemingLayer"
+      class="plone.app.theming.browser.help.Help"
       permission="zope2.View"
+      />
+
+  <browser:page
+      name="is_subsite_enabled"
+      for="*"
+      layer=".interfaces.ILineageThemingLayer"
       class=".action.ActionAvailableView"
+      permission="zope2.View"
       />
 
 </configure>
