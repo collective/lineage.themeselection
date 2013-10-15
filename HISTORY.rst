@@ -5,6 +5,9 @@ History
 1.3
 ---
 
+- Add GenericSetup config to properly register the Browser Layer.
+  [thet. 2013-10-15]
+
 - Let lineage.themeselection work with Plone 4.3, where plone.app.theming has a
   combined Diazo and Skins control panel. Setting the skin through this
   controlpanel doesn't work at the moment, so these settings are hidden for
