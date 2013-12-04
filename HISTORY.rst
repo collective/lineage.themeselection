@@ -2,8 +2,8 @@
 History
 =======
 
-1.3
----
+1.3 (2013-12-04)
+----------------
 
 - Add GenericSetup config to properly register the Browser Layer.
   [thet. 2013-10-15]
@@ -15,11 +15,13 @@ History
   lineage subsite.
   [thet, 2013-10-14]
 
+
 1.2
 ---
 
 - added Diazo Theme Support
   [jensens, 2012-01-01]
+
 
 1.1
 ---
@@ -28,8 +30,8 @@ History
 
 - cleanup [thet]
 
+
 1.0
 ---
 
 * Make it work. [jensens, 2011-06-06]
-
