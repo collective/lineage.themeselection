@@ -1,5 +1,5 @@
+from collective.lineage.interfaces import ILineageThemingLayer
 from zope.interface import alsoProvides
-from .interfaces import ILineageThemingLayer
 
 
 def apply_theme(obj, event):

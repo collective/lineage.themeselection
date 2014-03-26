@@ -8,13 +8,6 @@
   <include package="Products.CMFCore" file="permissions.zcml"/>
   <include package="collective.lineage" />
 
-  <genericsetup:registerProfile
-      name="default"
-      title="Lineage: Theme Selection Addon for Child Sites"
-      directory="profile"
-      description="Extension to allow theme selection for lineage child sites."
-      provides="Products.GenericSetup.interfaces.EXTENSION" />
-
   <adapter
       for="collective.lineage.interfaces.IChildSite"
       factory=".extender.ThemeSelectionExtender" />
@@ -53,5 +46,13 @@
       class=".action.ActionAvailableView"
       permission="zope2.View"
       />
+
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Lineage: Theme Selection Addon for Child Sites"
+      directory="profile"
+      description="Extension to allow theme selection for lineage child sites."
+      provides="Products.GenericSetup.interfaces.EXTENSION" />
 
 </configure>

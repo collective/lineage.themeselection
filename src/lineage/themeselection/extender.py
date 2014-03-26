@@ -1,8 +1,8 @@
-from zope.interface import implements
-from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
-from archetypes.schemaextender.field import ExtensionField
 from Products.Archetypes import atapi
 from Products.Archetypes.utils import OrderedDict
+from archetypes.schemaextender.field import ExtensionField
+from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
+from zope.interface import implements
 
 
 class StringExtField(ExtensionField, atapi.StringField):
