@@ -1,16 +1,28 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="lineage.themeselection">
 
   <include package="Products.CMFCore" file="permissions.zcml"/>
   <include package="collective.lineage" />
 
   <adapter
+      zcml:condition="installed Products.ATContentTypes"
       for="collective.lineage.interfaces.IChildSite"
       factory=".extender.ThemeSelectionExtender" />
+
+  <configure zcml:condition="installed plone.dexterity">
+    <include package="plone.behavior" file="meta.zcml" />
+    <plone:behavior
+        title="Lineage Theme Selection"
+        description="Lineage theme selection behavior"
+        provides=".behaviors.IThemeSelection"
+        for="collective.lineage.interfaces.IChildSite"
+        marker=".behaviors.IThemeSelection" />
+  </configure>
 
   <subscriber
       for="collective.lineage.interfaces.IChildSite

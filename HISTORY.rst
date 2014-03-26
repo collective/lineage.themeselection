@@ -2,6 +2,13 @@
 History
 =======
 
+1.4 (unreleased)
+----------------
+
+- Add support for Dexterity.
+  [thet]
+
+
 1.3 (2013-12-04)
 ----------------
 

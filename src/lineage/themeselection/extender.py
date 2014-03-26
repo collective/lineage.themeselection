@@ -23,7 +23,7 @@ class ThemeSelectionExtender(object):
             required=False,
             vocabulary_factory='plone.app.vocabularies.Skins',
             widget=atapi.SelectionWidget(
-                label=u"Theme for Child-Site",
+                label=u"Theme for Child Site",
                 description=u"Select a theme for the child site.",
             )
         ),
