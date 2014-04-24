@@ -1,13 +1,13 @@
-This package provides theme selection for Lineage subsites. 
+This package provides theme selection for Lineage subsites.
 
 In Plone we have ``plone.app.theming`` (aka Diazo theming) and the old CMF skins.
-Both are almost independent. 
+Both are almost independent.
 
-lineage.themeselection adds a `lineage.registry <http://pypi.python.org/pypi/lineage.themeselection>`_ 
-local component containing the settings for the ``plone.app.theming`` based theme. 
+lineage.themeselection adds a `lineage.registry <http://pypi.python.org/pypi/lineage.themeselection>`_
+local component containing the settings for the ``plone.app.theming`` based theme.
 An object tab appears for site-managers to configure the subsite theme.
 
-Additionally it adds a schema-extender to the ChildSite Folder adding a CMFSkin 
+Additionally it adds a schema-extender to the ChildSite Folder adding a CMFSkin
 selection dropown to the settings tab under edit.
 
 On traversal skin is switched and a plone.browserlayer marker is put on the request.
@@ -61,6 +61,10 @@ Contributors
 ============
 
 * Jens Klein <jens@bluedynamics.com>
+
+* Johannes Raggam
+
+* Harald Friessnegger
 
 * thanks to Maurits van Rees for showing with collective.editskinswitcher how
   this can be implemented and to the Weblion-team for the same with

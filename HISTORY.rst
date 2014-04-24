@@ -5,6 +5,10 @@ History
 1.4 (unreleased)
 ----------------
 
+- Also set the browserlayer registered under the skin name if it exists and
+  remove the one set by the "old" skin.
+  [fRiSi]
+
 - Add support for Dexterity.
   [thet]
 
