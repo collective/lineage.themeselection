@@ -40,6 +40,11 @@ def apply_theme(obj, event):
     """Switch to the skin or theme selected for the child site.
     """
     
+    if event.request.get('editskinswitched', 'None'):
+        # don't switch/set skin if collective.editskinswitcher has set
+        # the edit skin already
+        return 
+    
     alsoProvides(event.request, ILineageThemingLayer)
     theme = None
     if IBaseObject.providedBy(obj):
