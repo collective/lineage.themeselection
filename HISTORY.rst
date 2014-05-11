@@ -5,6 +5,15 @@ History
 1.4 (unreleased)
 ----------------
 
+- Also set the browserlayer registered under the skin name if it exists and
+  remove the one set by the "old" skin.
+  [fRiSi]
+
+- Play well with collective.editskinswitcher. If edit skin is active, do
+  not set/activate any other skin. This allows to use a specific skin (eg.
+  Sunburst) for CMS-mode even for Subsites which define a different theme.
+  [fRiSi]
+
 - Add support for Dexterity.
   [thet]
 
