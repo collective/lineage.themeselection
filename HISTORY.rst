@@ -2,7 +2,7 @@
 History
 =======
 
-1.4 (unreleased)
+1.4 (2014-11-20)
 ----------------
 
 - Also set the browserlayer registered under the skin name if it exists and
