@@ -21,11 +21,11 @@ except ImportError:
 def set_theme_specific_layers(request, context, new_skin, current_skin):
     """mark the request with the browserlayer named new_skin
     and remove the one marked with current_skin
-    
+
     we can't be sure plone.theme.layer.mark_layer is called after our traverser
-    so we add the layer manually.        
+    so we add the layer manually.
     """
-    
+
     # remove theme specific layer of the current skin
     current_skin_iface = queryUtility(IBrowserSkinType, name=current_skin)
     if current_skin_iface is not None:
@@ -39,12 +39,12 @@ def set_theme_specific_layers(request, context, new_skin, current_skin):
 def apply_theme(obj, event):
     """Switch to the skin or theme selected for the child site.
     """
-    
+
     if event.request.get('editskinswitched', 'None'):
         # don't switch/set skin if collective.editskinswitcher has set
         # the edit skin already
-        return 
-    
+        return
+
     alsoProvides(event.request, ILineageThemingLayer)
     theme = None
     if IBaseObject.providedBy(obj):
