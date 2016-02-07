@@ -1,4 +1,9 @@
+from collective.lineage.interfaces import IChildSite
+from collective.lineage.utils import parent_site
+from plone.app.layout.viewlets.common import ViewletBase
 from plone.app.theming.browser.controlpanel import ThemingControlpanel
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.interfaces import IPloneSiteRoot
 
 
 class LineageSubsiteFacade(object):
@@ -17,49 +22,63 @@ class LineageSubsiteFacade(object):
         self.subsite.lineage_theme = value
 
     def getDefaultSkin(self):
-        return self.default_skin
+        parent = parent_site()
+        parent_skin = None
+        if IChildSite.providedBy(parent):
+            # Wrap with this class to use this convenient API
+            parent_wrapped = LineageSubsiteFacade(parent)
+            parent_skin = getattr(parent_wrapped, 'default_skin', None)
+            if not parent_skin:
+                # This one eventually iterates up to where no getDefaultSkin is
+                # defined on parent anymore... (e.g. the IPloneSiteRoot)
+                parent_skin = getattr(parent_wrapped, 'getDefaultSkin', None)
+        elif IPloneSiteRoot.providedBy(parent):
+            pskin = getToolByName(self.context, 'portal_skins')
+            parent_skin = pskin.getDefaultSkin()
+        return parent_skin
 
     # plone.app.theming < 1.2
 
     @property
     def theme(self):
-        return self.subsite.lineage_theme
+        return self.default_skin
 
     @theme.setter
     def theme(self, value):
-        self.subsite.lineage_theme = value
+        self.default_skin = value
 
+    # These cannot be set for plone.app.theming < 1.2
     @property
     def mark_special_links(self):
-        return getattr(self.subsite, 'mark_special_links', None)
+        return None
 
     @mark_special_links.setter
     def mark_special_links(self, value):
-        self.subsite.mark_special_links = value
+        pass
 
     @property
     def ext_links_open_new_window(self):
-        return getattr(self.subsite, 'ext_links_open_new_window', None)
+        return None
 
     @ext_links_open_new_window.setter
     def ext_links_open_new_window(self, value):
-        self.subsite.ext_links_open_new_window = value
+        pass
 
     @property
     def use_popups(self):
-        return getattr(self.subsite, 'use_popups', None)
+        return None
 
     @use_popups.setter
     def use_popups(self, value):
-        self.subsite.use_popups = value
+        pass
 
     @property
     def icon_visibility(self):
-        return getattr(self.subsite, 'icon_visibility', None)
+        return None
 
     @icon_visibility.setter
     def icon_visibility(self, value):
-        self.subsite.icon_visibility = value
+        pass
 
 
 class LineageThemingControlpanel(ThemingControlpanel):
@@ -90,3 +109,15 @@ class LineageThemingControlpanel(ThemingControlpanel):
         # don't let skinsSettings to be set
         return
 
+
+class ControlPanelStyleViewlet(ViewletBase):
+    """Hide all but "Theme base" settings from the "Theme base" tab.
+    """
+
+    def index(self):
+        return u"""
+<style type="text/css">
+    body.template-theming-controlpanel:not(.portaltype-plone-site) #fieldset-advanced fieldset:nth-of-type(2) div { display:none; }
+    body.template-theming-controlpanel:not(.portaltype-plone-site) #fieldset-advanced fieldset:nth-of-type(2) div:nth-of-type(1) { display:block; }
+</style>
+"""

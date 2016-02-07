@@ -29,10 +29,23 @@
            zope.traversing.interfaces.IBeforeTraverseEvent"
       handler=".subscriber.apply_theme" />
 
-  <adapter
-      zcml:condition="not-have plone-5"
-      for="collective.lineage.interfaces.IChildSite"
-      factory="plone.app.controlpanel.skins.SkinsControlPanelAdapter"/>
+  <configure zcml:condition="not-have plone-5">
+    <adapter
+        zcml:condition="not-have plone-5"
+        for="collective.lineage.interfaces.IChildSite"
+        factory="plone.app.controlpanel.skins.SkinsControlPanelAdapter"/>
+
+    <!-- hide other than "Theme base" from "Theme base" tab -->
+    <browser:viewlet
+        name="lineage.themeselection.controlpanelstyles"
+        for="collective.lineage.interfaces.IChildSite"
+        view=".themingcontrolpanel.LineageThemingControlpanel"
+        manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
+        class=".themingcontrolpanel.ControlPanelStyleViewlet"
+        layer=".interfaces.ILineageThemingLayer"
+        permission="zope2.View"
+        />
+  </configure>
 
   <configure package="plone.app.theming.browser">
     <browser:page
