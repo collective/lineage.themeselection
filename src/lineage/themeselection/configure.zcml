@@ -39,7 +39,7 @@
         name="theming-controlpanel"
         for="collective.lineage.interfaces.IChildSite"
         layer="lineage.themeselection.interfaces.ILineageThemingLayer"
-        class="plone.app.theming.browser.controlpanel.ThemingControlpanel"
+        class="lineage.themeselection.themingcontrolpanel.LineageThemingControlpanel"
         template="controlpanel.pt"
         permission="cmf.ManagePortal"
         />

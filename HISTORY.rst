@@ -3,10 +3,12 @@ History
 =======
 
 
-1.4.2 (unreleased)
-------------------
+1.5 (unreleased)
+----------------
 
-- Nothing changed yet.
+- Allow setting of ``lineage_theme`` skin setting through the ``@@theming-controlpanel`` and remove the customized controlpanel template.
+  This works for ``plone.app.theming`` ``1.1.x`` and ``1.2.x``.
+  [thet]
 
 
 1.4.1 (2016-02-08)
