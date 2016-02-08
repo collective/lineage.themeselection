@@ -25,22 +25,24 @@ def set_theme_specific_layers(request, context, new_skin, current_skin):
     we can't be sure plone.theme.layer.mark_layer is called after our traverser
     so we add the layer manually.
     """
-
-    # remove theme specific layer of the current skin
-    current_skin_iface = queryUtility(IBrowserSkinType, name=current_skin)
-    if current_skin_iface is not None:
-        noLongerProvides(request, current_skin_iface)
-    # check to see the skin has a BrowserSkinType and add it.
+    # check to see the skin has a IBrowserSkinType layer
     skin_iface = queryUtility(IBrowserSkinType, new_skin)
-    if skin_iface is not None and not skin_iface.providedBy(request):
-        alsoProvides(request, skin_iface)
+    if skin_iface:
+        # remove theme specific layer of the current skin
+        current_skin_iface = queryUtility(IBrowserSkinType, name=current_skin)
+
+        if current_skin_iface is not None:
+            noLongerProvides(request, current_skin_iface)
+
+        # add the layer interface
+        if skin_iface is not None and not skin_iface.providedBy(request):
+            alsoProvides(request, skin_iface)
 
 
 def apply_theme(obj, event):
     """Switch to the skin or theme selected for the child site.
     """
-
-    if event.request.get('editskinswitched', 'None'):
+    if event.request.get('editskinswitched', False):
         # don't switch/set skin if collective.editskinswitcher has set
         # the edit skin already
         return

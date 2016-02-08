@@ -2,6 +2,19 @@
 History
 =======
 
+
+1.4.1 (unreleased)
+------------------
+
+Fixes:
+
+- Only remove the current ``IBrowserSkinType`` browser layer and add the new one, if a new one can be found.
+  [thet]
+
+- Fix a bug in the ``apply_theme`` event subscriber, which prevented it from correctly set the skin.
+  [thet]
+
+
 1.4 (2014-11-20)
 ----------------
 
