@@ -5,6 +5,7 @@ from plone.app.layout.viewlets.common import ViewletBase
 from plone.app.theming.browser.controlpanel import ThemingControlpanel
 from plone.registry.interfaces import IRegistry
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import safe_unicode
 from zope.component import getUtility
 
 
@@ -36,7 +37,7 @@ class LineageSubsiteFacade(object):
             settings = registry.forInterface(
                 ILineageThemeSelectionSettings, prefix=REG_KEY_PREFIX
             )
-            settings.skin = value
+            settings.skin = safe_unicode(value)
 
     def getDefaultSkin(self):
         default_skin = self.default_skin
