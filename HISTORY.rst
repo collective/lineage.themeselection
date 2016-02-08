@@ -6,6 +6,9 @@ History
 1.5 (unreleased)
 ----------------
 
+- Set the childsite skin on a ``lineage.registry`` based local registry instead of an ``lineage_theme`` attribute on an ``IChildSite`` object.
+  [thet]
+
 - Allow setting of ``lineage_theme`` skin setting through the ``@@theming-controlpanel`` and remove the customized controlpanel template, Archetypes schemaextender and Dexterity behavior.
   This works for ``plone.app.theming`` ``1.1.x`` and ``1.2.x``.
   [thet]

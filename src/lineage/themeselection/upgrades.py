@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+from .themingcontrolpanel import LineageSubsiteFacade
+from collective.lineage.interfaces import IChildSite
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import safe_unicode
 from plone.dexterity.interfaces import IDexterityFTI
 
 import logging
@@ -20,3 +23,26 @@ def remove_behavior(context):
                     it for it in types_tool.Folder.behaviors if it not in key
                 )
                 logger.info("Removed {0} from {1}".format(key, item.id))
+
+
+def migrate_to_registry(context):
+    """Remove all ``lineage_theme`` properties from IChildSite objects and
+    migrate it to the plone.registry under the key
+    ``lineage.themeselection.skin``.
+    """
+    cat = getToolByName(context, 'portal_catalog')
+    items = cat.searchResults(object_provides=IChildSite.__identifier__)
+
+    import ipdb
+    ipdb.set_trace()
+    for it in items:
+        ob = it.getObject()
+        skin = getattr(ob, 'lineage_theme', None)
+        if skin:
+            skin = safe_unicode(skin)
+            wrapped_site = LineageSubsiteFacade(ob)
+            wrapped_site.default_skin = skin
+            del ob.lineage_theme
+            logger.info("Migrated skin setting {0} for {1}".format(
+                skin, '/'.join(ob.getPhysicalPath()))
+            )

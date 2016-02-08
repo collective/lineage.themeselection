@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
+from .interfaces import REG_KEY_PREFIX
+from .interfaces import ILineageThemeSelectionSettings
 from collective.lineage.interfaces import IChildSite
 from collective.lineage.utils import parent_site
 from plone.app.layout.viewlets.common import ViewletBase
 from plone.app.theming.browser.controlpanel import ThemingControlpanel
+from plone.registry.interfaces import IRegistry
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
+from zope.component import getUtility
 
 
 class LineageSubsiteFacade(object):
@@ -16,11 +20,26 @@ class LineageSubsiteFacade(object):
 
     @property
     def default_skin(self):
-        return self.subsite.lineage_theme
+        registry = getUtility(IRegistry, context=self.subsite)
+        settings = registry.forInterface(
+            ILineageThemeSelectionSettings, check=False, prefix=REG_KEY_PREFIX
+        )
+        return settings.skin
 
     @default_skin.setter
     def default_skin(self, value):
-        self.subsite.lineage_theme = value
+        registry = getUtility(IRegistry, context=self.subsite)
+        try:
+            registry.records['{0}.skin'.format(REG_KEY_PREFIX)]
+        except KeyError:
+            registry.registerInterface(
+                interface=ILineageThemeSelectionSettings, prefix=REG_KEY_PREFIX
+            )
+        finally:
+            settings = registry.forInterface(
+                ILineageThemeSelectionSettings, prefix=REG_KEY_PREFIX
+            )
+            settings.skin = value
 
     def getDefaultSkin(self):
         parent = parent_site()

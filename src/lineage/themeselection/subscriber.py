@@ -1,21 +1,9 @@
 from lineage.themeselection.interfaces import ILineageThemingLayer
+from lineage.themeselection.themingcontrolpanel import LineageSubsiteFacade
 from zope.component import queryUtility
 from zope.interface import alsoProvides
 from zope.interface import noLongerProvides
-from zope.interface import Interface
 from zope.publisher.interfaces.browser import IBrowserSkinType
-
-
-try:
-    from Products.Archetypes.interfaces import IBaseObject
-except ImportError:
-    class IBaseObject(Interface):
-        pass
-try:
-    from plone.dexterity.interfaces import IDexterityContent
-except ImportError:
-    class IDexterityContent(Interface):
-        pass
 
 
 def set_theme_specific_layers(request, context, new_skin, current_skin):
@@ -39,7 +27,7 @@ def set_theme_specific_layers(request, context, new_skin, current_skin):
             alsoProvides(request, skin_iface)
 
 
-def apply_theme(obj, event):
+def apply_skin(obj, event):
     """Switch to the skin or theme selected for the child site.
     """
     if event.request.get('editskinswitched', False):
@@ -48,17 +36,10 @@ def apply_theme(obj, event):
         return
 
     alsoProvides(event.request, ILineageThemingLayer)
-    theme = None
-    if IBaseObject.providedBy(obj):
-        field = obj.Schema().get('lineage_theme', None)
-        if field is None:
-            return
-        theme = field.get(obj)
-    elif IDexterityContent.providedBy(obj):
-        theme = getattr(obj, 'lineage_theme', None)
-    if not theme:
+    wrapped_site = LineageSubsiteFacade(obj)
+    skin = wrapped_site.default_skin
+    if not skin:
         return
     current_skin = obj.getCurrentSkinName()
-    obj.changeSkin(theme, event.request)
-    set_theme_specific_layers(event.request, obj, theme,
-                              current_skin)
+    obj.changeSkin(skin, event.request)
+    set_theme_specific_layers(event.request, obj, skin, current_skin)

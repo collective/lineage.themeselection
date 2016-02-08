@@ -12,7 +12,7 @@
   <subscriber
       for="collective.lineage.interfaces.IChildSite
            zope.traversing.interfaces.IBeforeTraverseEvent"
-      handler=".subscriber.apply_theme" />
+      handler=".subscriber.apply_skin" />
 
   <configure zcml:condition="not-have plone-5">
     <adapter
@@ -68,9 +68,18 @@
       provides="Products.GenericSetup.interfaces.EXTENSION" />
 
   <genericsetup:upgradeStep
+      title="Migrate to plone.registry"
+      source="1"
+      destination="2"
+      sortkey="1"
+      handler=".upgrades.migrate_to_registry"
+      profile="lineage.themeselection:default"
+      />
+  <genericsetup:upgradeStep
       title="Remove Behavior"
       source="1"
       destination="2"
+      sortkey="2"
       handler=".upgrades.remove_behavior"
       profile="lineage.themeselection:default"
       />
