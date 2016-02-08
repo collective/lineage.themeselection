@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from .themingcontrolpanel import LineageSubsiteFacade
 from collective.lineage.interfaces import IChildSite
+from lineage.themeselection.themingcontrolpanel import LineageSubsiteFacade
+from plone.dexterity.interfaces import IDexterityFTI
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
-from plone.dexterity.interfaces import IDexterityFTI
 
 import logging
 

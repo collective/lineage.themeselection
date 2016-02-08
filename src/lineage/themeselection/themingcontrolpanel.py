@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from .interfaces import REG_KEY_PREFIX
-from .interfaces import ILineageThemeSelectionSettings
 from collective.lineage.interfaces import IChildSite
 from collective.lineage.utils import parent_site
+from lineage.themeselection.interfaces import ILineageThemeSelectionSettings
+from lineage.themeselection.interfaces import REG_KEY_PREFIX
 from plone.app.layout.viewlets.common import ViewletBase
 from plone.app.theming.browser.controlpanel import ThemingControlpanel
 from plone.registry.interfaces import IRegistry
