@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
-from collective.lineage.interfaces import IChildSite
-from collective.lineage.utils import parent_site
 from lineage.themeselection.interfaces import ILineageThemeSelectionSettings
 from lineage.themeselection.interfaces import REG_KEY_PREFIX
 from plone.app.layout.viewlets.common import ViewletBase
 from plone.app.theming.browser.controlpanel import ThemingControlpanel
 from plone.registry.interfaces import IRegistry
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.interfaces import IPloneSiteRoot
 from zope.component import getUtility
 
 
@@ -42,20 +39,11 @@ class LineageSubsiteFacade(object):
             settings.skin = value
 
     def getDefaultSkin(self):
-        parent = parent_site()
-        parent_skin = None
-        if IChildSite.providedBy(parent):
-            # Wrap with this class to use this convenient API
-            parent_wrapped = LineageSubsiteFacade(parent)
-            parent_skin = getattr(parent_wrapped, 'default_skin', None)
-            if not parent_skin:
-                # This one eventually iterates up to where no getDefaultSkin is
-                # defined on parent anymore... (e.g. the IPloneSiteRoot)
-                parent_skin = getattr(parent_wrapped, 'getDefaultSkin', None)
-        elif IPloneSiteRoot.providedBy(parent):
+        default_skin = self.default_skin
+        if not default_skin:
             pskin = getToolByName(self.context, 'portal_skins')
-            parent_skin = pskin.getDefaultSkin()
-        return parent_skin
+            default_skin = pskin.getDefaultSkin()
+        return default_skin
 
     # plone.app.theming < 1.2
 
