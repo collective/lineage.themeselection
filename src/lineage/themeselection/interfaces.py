@@ -4,7 +4,7 @@ from zope import schema
 from zope.interface import Interface
 
 
-REG_KEY_PREFIX = 'lineage.themeselection.skin'
+REG_KEY_PREFIX = 'lineage.themeselection'
 
 
 class ILineageThemingLayer(IThemingLayer):

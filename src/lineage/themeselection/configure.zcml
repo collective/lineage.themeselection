@@ -16,7 +16,6 @@
 
   <configure zcml:condition="not-have plone-5">
     <adapter
-        zcml:condition="not-have plone-5"
         for="collective.lineage.interfaces.IChildSite"
         factory="plone.app.controlpanel.skins.SkinsControlPanelAdapter"/>
 

@@ -33,8 +33,6 @@ def migrate_to_registry(context):
     cat = getToolByName(context, 'portal_catalog')
     items = cat.searchResults(object_provides=IChildSite.__identifier__)
 
-    import ipdb
-    ipdb.set_trace()
     for it in items:
         ob = it.getObject()
         skin = getattr(ob, 'lineage_theme', None)
