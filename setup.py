@@ -1,17 +1,22 @@
-from setuptools import setup, find_packages
-import os
+# -*- coding: utf-8 -*-
+from setuptools import find_packages
+from setuptools import setup
 
-version = '1.4.2.dev0'
-shortdesc = "Lineage Addon: Theme Selection on Subsites"
-longdesc = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
-longdesc += open(os.path.join(os.path.dirname(__file__), 'HISTORY.rst')).read()
-longdesc += open(os.path.join(os.path.dirname(__file__), 'LICENSE.rst')).read()
+
+version = '2.0.dev0'
+short_description = "Lineage Addon: Theme Selection on Subsites"
+long_description = ('\n'.join([
+    open('README.rst').read(),
+    open('CHANGES.rst').read(),
+    open('LICENSE.rst').read(),
+]))
+
 
 setup(
     name='lineage.themeselection',
     version=version,
-    description=shortdesc,
-    long_description=longdesc,
+    description=short_description,
+    long_description=long_description,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
@@ -37,7 +42,6 @@ setup(
         'setuptools',
         'collective.lineage',
         'lineage.registry',
-        'archetypes.schemaextender',
         'plone.app.theming',  # for plone 4.2
     ],
     entry_points="""

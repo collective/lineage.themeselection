@@ -21,13 +21,8 @@ Installation
 Usage
 =====
 
-After installation click on edit at the child site folder and go to settings.
-There you can select one of the installed skins.
+Open the "Theme" tab on your ChildSite and edit the Diazo theme and the theme base skin.
 
-Restrictions
-============
-
-The child site object has to be Archetypes based.
 
 Installation
 ============

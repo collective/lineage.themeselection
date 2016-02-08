@@ -1,5 +1,6 @@
-from Products.Five import BrowserView
+# -*- coding: utf-8 -*-
 from collective.lineage.interfaces import IChildSite
+from Products.Five import BrowserView
 
 
 class ActionAvailableView(BrowserView):
