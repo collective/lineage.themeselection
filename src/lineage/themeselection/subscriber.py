@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from lineage.themeselection.interfaces import ILineageThemingLayer
 from lineage.themeselection.themingcontrolpanel import LineageSubsiteFacade
 from zope.component import queryUtility

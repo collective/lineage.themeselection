@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from plone.app.theming.interfaces import IThemingLayer
 from zope import schema
 from zope.interface import Interface
