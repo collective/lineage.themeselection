@@ -6,11 +6,26 @@ History
 1.5 (unreleased)
 ----------------
 
+.. warning:: Upgrade Warning!
+    After installing this release, you need to run the provided upgrade steps.
+
+New:
+
 - Set the childsite skin on a ``lineage.registry`` based local registry instead of an ``lineage_theme`` attribute on an ``IChildSite`` object.
+  Includes an upgrade step.
   [thet]
 
 - Allow setting of ``lineage_theme`` skin setting through the ``@@theming-controlpanel`` and remove the customized controlpanel template, Archetypes schemaextender and Dexterity behavior.
   This works for ``plone.app.theming`` ``1.1.x`` and ``1.2.x``.
+  Includes an upgrade step.
+  [thet]
+
+Fixes:
+
+- Only remove the current ``IBrowserSkinType`` browser layer and add the new one, if a new one can be found.
+  [thet]
+
+- Fix a bug in the ``apply_theme`` event subscriber, which prevented it from correctly set the skin.
   [thet]
 
 
