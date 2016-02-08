@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from collective.lineage.interfaces import IChildSite
 from collective.lineage.utils import parent_site
 from plone.app.layout.viewlets.common import ViewletBase

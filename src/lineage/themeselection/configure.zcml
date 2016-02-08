@@ -9,21 +9,6 @@
   <include package="Products.CMFCore" file="permissions.zcml"/>
   <include package="collective.lineage" />
 
-  <adapter
-      zcml:condition="installed Products.ATContentTypes"
-      for="collective.lineage.interfaces.IChildSite"
-      factory=".extender.ThemeSelectionExtender" />
-
-  <configure zcml:condition="installed plone.dexterity">
-    <include package="plone.behavior" file="meta.zcml" />
-    <plone:behavior
-        title="Lineage Theme Selection"
-        description="Lineage theme selection behavior"
-        provides=".behaviors.IThemeSelection"
-        for="collective.lineage.interfaces.IChildSite"
-        marker=".behaviors.IThemeSelection" />
-  </configure>
-
   <subscriber
       for="collective.lineage.interfaces.IChildSite
            zope.traversing.interfaces.IBeforeTraverseEvent"
@@ -81,5 +66,13 @@
       directory="profile"
       description="Extension to allow theme selection for lineage child sites."
       provides="Products.GenericSetup.interfaces.EXTENSION" />
+
+  <genericsetup:upgradeStep
+      title="Remove Behavior"
+      source="1"
+      destination="2"
+      handler=".upgrades.remove_behavior"
+      profile="lineage.themeselection:default"
+      />
 
 </configure>

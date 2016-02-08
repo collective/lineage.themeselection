@@ -37,7 +37,6 @@ setup(
         'setuptools',
         'collective.lineage',
         'lineage.registry',
-        'archetypes.schemaextender',
         'plone.app.theming',  # for plone 4.2
     ],
     entry_points="""
