@@ -42,7 +42,7 @@ class LineageSubsiteFacade(object):
     def getDefaultSkin(self):
         default_skin = self.default_skin
         if not default_skin:
-            pskin = getToolByName(self.context, 'portal_skins')
+            pskin = getToolByName(self.subsite, 'portal_skins')
             default_skin = pskin.getDefaultSkin()
         return default_skin
 
