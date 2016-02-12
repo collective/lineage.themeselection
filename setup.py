@@ -4,8 +4,8 @@ from setuptools import setup
 
 
 version = '2.0.dev0'
-short_description = "Lineage Addon: Theme Selection on Subsites"
-long_description = '\n'.join([
+short_description = u"Lineage Add-On: Theme Selection on Subsites"
+long_description = u'\n\n'.join([
     open('README.rst').read(),
     open('CHANGES.rst').read(),
     open('LICENSE.rst').read(),

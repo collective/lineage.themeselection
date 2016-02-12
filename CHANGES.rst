@@ -22,7 +22,8 @@ New:
 
 Fixes:
 
-- *add item here*
+- Install ``lineage.registry`` when installing this addon.
+  [thet]
 
 
 1.4.1 (2016-02-08)
