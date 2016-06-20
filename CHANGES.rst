@@ -3,7 +3,7 @@ History
 =======
 
 
-2.0 (unreleased)
+2.0 (2016-06-20)
 ----------------
 
 .. warning:: Upgrade Warning!
