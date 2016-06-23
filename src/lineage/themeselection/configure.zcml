@@ -53,10 +53,9 @@
   <browser:page
       name="is_subsite_enabled"
       for="*"
-      layer=".interfaces.ILineageThemingLayer"
       class=".action.ActionAvailableView"
       permission="zope2.View"
-      />
+      /><!-- no layer here, so that it can be called without lineage.themeselection installed -->
 
 
   <genericsetup:registerProfile
