@@ -6,6 +6,9 @@ History
 2.1 (unreleased)
 ----------------
 
+- Depend on lineage.controlpanels since ``is_subsite_enabled`` now lives there.
+  [jensens]
+
 - Do not bind the ``is_subsite_enabled`` view on a layer, so that it is callable also when lineage.themeselection is not installed.
   Fixes an error I don't yet understand (not finding the view when applying a profile, which installs lineage.controlpanels).
   [thet]

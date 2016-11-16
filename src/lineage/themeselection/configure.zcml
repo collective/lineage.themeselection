@@ -50,14 +50,6 @@
         />
   </configure>
 
-  <browser:page
-      name="is_subsite_enabled"
-      for="*"
-      class=".action.ActionAvailableView"
-      permission="zope2.View"
-      /><!-- no layer here, so that it can be called without lineage.themeselection installed -->
-
-
   <genericsetup:registerProfile
       name="default"
       title="Lineage: Theme Selection Addon for Child Sites"
