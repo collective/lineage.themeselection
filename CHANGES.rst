@@ -6,6 +6,9 @@ History
 2.1 (unreleased)
 ----------------
 
+- Add uninstall profile.
+  [jensens]
+
 - Depend on lineage.controlpanels since ``is_subsite_enabled`` now lives there.
   [jensens]
 

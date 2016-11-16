@@ -57,6 +57,13 @@
       description="Extension to allow theme selection for lineage child sites."
       provides="Products.GenericSetup.interfaces.EXTENSION" />
 
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="Lineage: Theme Selection Addon for Child Sites (UNINSTALL)"
+      directory="uninstall"
+      description="Uninstall extension to allow theme selection for lineage child sites."
+      provides="Products.GenericSetup.interfaces.EXTENSION" />
+
   <genericsetup:upgradeStep
       title="Migrate to plone.registry"
       source="1"
