@@ -16,6 +16,10 @@ History
   Fixes an error I don't yet understand (not finding the view when applying a profile, which installs lineage.controlpanels).
   [thet]
 
+- Fix upgrade script to not acquire ``lineage_theme`` attribute when trying to delete it.
+  [thet]
+
+
 2.0 (2016-06-20)
 ----------------
 

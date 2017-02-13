@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from Acquisition import aq_base
 from collective.lineage.interfaces import IChildSite
 from lineage.themeselection.themingcontrolpanel import LineageSubsiteFacade
 from plone.dexterity.interfaces import IDexterityFTI
@@ -35,12 +36,12 @@ def migrate_to_registry(context):
 
     for it in items:
         ob = it.getObject()
-        skin = getattr(ob, 'lineage_theme', None)
+        skin = getattr(aq_base(ob), 'lineage_theme', None)
         if skin:
             skin = safe_unicode(skin)
             wrapped_site = LineageSubsiteFacade(ob)
             wrapped_site.default_skin = skin
-            del ob.lineage_theme
+            del aq_base(ob).lineage_theme
             logger.info("Migrated skin setting {0} for {1}".format(
                 skin, '/'.join(ob.getPhysicalPath()))
             )
