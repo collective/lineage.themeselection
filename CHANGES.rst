@@ -6,6 +6,9 @@ History
 2.1 (unreleased)
 ----------------
 
+- Fix missing ZCML from dependencies.
+  [rpatterson]
+
 - Add uninstall profile.
   [jensens]
 

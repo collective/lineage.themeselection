@@ -7,7 +7,10 @@
     i18n_domain="lineage.themeselection">
 
   <include package="Products.CMFCore" file="permissions.zcml"/>
-  <include package="collective.lineage" />
+
+  <!-- Set up z3c.autoinlcude to scan dependencies and plugins of this package -->
+  <includePlugins package="." />
+  <includeDependencies package="." />
 
   <subscriber
       for="collective.lineage.interfaces.IChildSite
