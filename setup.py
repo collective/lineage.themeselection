@@ -3,7 +3,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-version = '2.1'
+version = '2.2.dev0'
 short_description = u"Lineage Add-On: Theme Selection on Subsites"
 long_description = u'\n\n'.join([
     open('README.rst').read(),
