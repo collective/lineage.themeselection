@@ -3,7 +3,7 @@ History
 =======
 
 
-2.1 (unreleased)
+2.1 (2019-03-26)
 ----------------
 
 - Fix missing ZCML from dependencies.
