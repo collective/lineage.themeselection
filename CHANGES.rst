@@ -6,7 +6,7 @@ History
 2.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Compatibility with Plone 6.
 
 
 2.1 (2019-03-26)

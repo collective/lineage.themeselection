@@ -8,10 +8,6 @@
 
   <include package="Products.CMFCore" file="permissions.zcml"/>
 
-  <!-- Set up z3c.autoinlcude to scan dependencies and plugins of this package -->
-  <includePlugins package="." />
-  <includeDependencies package="." />
-
   <subscriber
       for="collective.lineage.interfaces.IChildSite
            zope.traversing.interfaces.IBeforeTraverseEvent"
