@@ -6,6 +6,10 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="lineage.themeselection">
 
+  <include package="collective.lineage" />
+  <include package="lineage.registry" />
+  <include package="lineage.controlpanels" />
+  <include package="plone.app.theming" />
   <include package="Products.CMFCore" file="permissions.zcml"/>
 
   <subscriber
