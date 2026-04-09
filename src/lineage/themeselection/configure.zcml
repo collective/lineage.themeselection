@@ -2,15 +2,13 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    xmlns:plone="http://namespaces.plone.org/plone"
-    xmlns:zcml="http://namespaces.zope.org/zcml"
-    i18n_domain="lineage.themeselection">
+    xmlns:zcml="http://namespaces.zope.org/zcml">
 
+  <include package="collective.lineage" />
+  <include package="lineage.registry" />
+  <include package="lineage.controlpanels" />
+  <include package="plone.app.theming" />
   <include package="Products.CMFCore" file="permissions.zcml"/>
-
-  <!-- Set up z3c.autoinlcude to scan dependencies and plugins of this package -->
-  <includePlugins package="." />
-  <includeDependencies package="." />
 
   <subscriber
       for="collective.lineage.interfaces.IChildSite
@@ -56,14 +54,14 @@
   <genericsetup:registerProfile
       name="default"
       title="Lineage: Theme Selection Addon for Child Sites"
-      directory="profile"
+      directory="profiles/default"
       description="Extension to allow theme selection for lineage child sites."
       provides="Products.GenericSetup.interfaces.EXTENSION" />
 
   <genericsetup:registerProfile
       name="uninstall"
       title="Lineage: Theme Selection Addon for Child Sites (UNINSTALL)"
-      directory="uninstall"
+      directory="profiles/uninstall"
       description="Uninstall extension to allow theme selection for lineage child sites."
       provides="Products.GenericSetup.interfaces.EXTENSION" />
 
