@@ -1,3 +1,5 @@
 include *.rst
 recursive-include src *
 recursive-exclude src *.pyc 
+exclude bootstrap.py
+exclude buildout.cfg
