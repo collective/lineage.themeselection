@@ -3,7 +3,13 @@ History
 =======
 
 
-2.2 (unreleased)
+2.3 (unreleased)
+----------------
+
+- Nothing changed yet.
+
+
+2.2 (2026-04-09)
 ----------------
 
 - Compatibility with Plone 6.
